@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Works | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="schedule.html">Class Schedule</a>
+            <a href="myworks.html" class="active">My Works</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="dashboard-wrapper">
+        
+        <aside class="sidebar">
+            <div class="profile-section">
+                <img src="girl_emoji.png" alt="Profile Picture" class="profile-pic">
+                <h2>Raneem</h2>
+                <p>IT Student</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="index.html#about" class="fragment-link">About Me</a>
+                <a href="index.html#education" class="fragment-link">Education</a>
+                <a href="index.html#skills" class="fragment-link">Skills</a>
+            </nav>
+
+            <div class="sidebar-contact">
+                <h3>Contact Info</h3>
+                <hr class="contact-divider">
+                <p class="contact-info">
+                    Email: <a href="mailto:ittraneem66@gmail.com">ittraneem66@gmail.com</a>
+                </p>
+                <p class="contact-info">
+                    Phone: <a href="tel:+966500000000">+966 50 000 0000</a>
+                </p>
+                
+                <div class="social-icons">
+                    <a href="https://x.com/1iran09" target="_blank" class="icon-link">
+                        <img src="https://img.freepik.com/free-vector/new-twitter-logo-x-2023-twitter-x-logo-vector-download_691560-10809.jpg" alt="X Icon" style="width: 32px; border-radius: 4px; mix-blend-mode: multiply;">
+                    </a>
+                    <a href="https://www.linkedin.com/in/raneemalshamrani/" target="_blank" class="icon-link">
+                        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn Icon" style="width: 30px; border-radius: 4px;">
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="card">
+                <h2>My Works</h2>
+                <div class="works-grid" style="display: flex; gap: 20px; margin-top: 20px;">
+                    
+                    <div class="work-card" style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; flex: 1; background: #fff;">
+                        <span style="color: #6c5270; font-size: 0.8em; font-weight: bold;">JavaScript</span>
+                        <h3 style="margin: 10px 0;">To-Do List App</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 20px; color: #555;">
+                            An interactive task manager that uses <strong>localStorage</strong> to persist your data even after refreshing the page.
+                        </p>
+                        <a href="part2.html" class="submit-btn" style="text-align: center; display: block;">Open App</a>
+                    </div>
+
+                    <div class="work-card" style="border: 1px solid #ddd; padding: 20px; border-radius: 10px; flex: 1; background: #fff;">
+                        <span style="color: #6c5270; font-size: 0.8em; font-weight: bold;">JavaScript + API</span>
+                        <h3 style="margin: 10px 0;">Country Explorer</h3>
+                        <p style="font-size: 0.9em; margin-bottom: 20px; color: #555;">
+                            A web app that fetches live data from the <strong>REST Countries API</strong> to display information about world nations.
+                        </p>
+                        <a href="app2.html" class="submit-btn" style="text-align: center; display: block;">Open App</a>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 My Portfolio. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

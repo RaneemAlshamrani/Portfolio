@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List App | Phase 2</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .todo-container {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        .todo-header {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 20px;
+        }
+        .todo-header input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .todo-header button {
+            background: var(--dark-purple);
+            color: #fff;
+            border: none;
+            padding: 0 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .task-item.done span {
+            text-decoration: line-through;
+            color: #aaa;
+        }
+        .task-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .delete-btn {
+            color: #f44336;
+            background: none;
+            border: none;
+            font-size: 1.4em;
+            cursor: pointer;
+        }
+        .todo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 0.9em;
+            color: #777;
+        }
+        .clear-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="schedule.html">Class Schedule</a>
+            <a href="myworks.html" class="active">My Works</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="profile-section">
+                <h3>About This App</h3>
+                <p>A simple To-Do List app built with HTML, CSS, and JavaScript.</p>
+                <p>Your tasks are saved in your browser using <strong>localStorage</strong>—they will still be here when you come back.</p>
+            </div>
+            <nav class="sidebar-nav" style="margin-top: 20px;">
+                <a href="myworks.html" class="fragment-link">Back to My Works</a>
+                <a href="app2.html" class="fragment-link">View App 2 (Country)</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="card" style="background: transparent; box-shadow: none; padding: 0;">
+                <div class="todo-container">
+                    <h2 style="border: none; margin-bottom: 20px;">To-Do List</h2>
+                    
+                    <div class="todo-header">
+                        <input type="text" id="taskInput" placeholder="Add a new task...">
+                        <button id="addBtn">Add</button>
+                    </div>
+
+                    <ul class="task-list" id="taskList"></ul>
+
+                    <div class="todo-footer">
+                        <span id="taskCount">0 of 0 completed</span>
+                        <button class="clear-btn" id="clearBtn">Clear completed</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const addBtn = document.getElementById('addBtn');
+        const taskList = document.getElementById('taskList');
+        const taskCount = document.getElementById('taskCount');
+        const clearBtn = document.getElementById('clearBtn');
+
+        let tasks = JSON.parse(localStorage.getItem('myTasksData')) || [];
+
+        function render() {
+            taskList.innerHTML = '';
+            let completedCount = 0;
+
+            tasks.forEach((task, index) => {
+                if(task.completed) completedCount++;
+
+                const li = document.createElement('li');
+                li.className = `task-item ${task.completed ? 'done' : ''}`;
+                
+                li.innerHTML = `
+                    <div class="task-left">
+                        <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${index})">
+                        <span>${task.text}</span>
+                    </div>
+                    <button class="delete-btn" onclick="removeTask(${index})">&times;</button>
+                `;
+                taskList.appendChild(li);
+            });
+
+            taskCount.textContent = `${completedCount} of ${tasks.length} completed`;
+            localStorage.setItem('myTasksData', JSON.stringify(tasks));
+        }
+
+        function addNewTask() {
+            const text = taskInput.value.trim();
+            if(text) {
+                tasks.push({ text: text, completed: false });
+                taskInput.value = '';
+                render();
+            }
+        }
+
+        window.toggleTask = function(index) {
+            tasks[index].completed = !tasks[index].completed;
+            render();
+        };
+
+        window.removeTask = function(index) {
+            tasks.splice(index, 1);
+            render();
+        };
+
+        clearBtn.addEventListener('click', () => {
+            tasks = tasks.filter(task => !task.completed);
+            render();
+        });
+
+        addBtn.addEventListener('click', addNewTask);
+        taskInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') addNewTask();
+        });
+
+        render();
+    </script>
+</body>
+</html>
